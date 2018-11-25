@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var focusSquare: FocusSquare?
     var screenCenter: CGPoint!
     
+    var totalModelsInScene: Array<SCNNode> = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,8 +66,21 @@ class ViewController: UIViewController {
         self.screenCenter = viewCenter
     }
     
+    
     func updateFocusSquare(){
         guard let focusSquareLocal = self.focusSquare else {return}
+        
+        //following part is for hiding and showing focusSquare when object is placed
+       /* guard let pointOfView = sceneView.pointOfView else {return}
+        let firstVisibleModel = totalModelsInScene.first { (node) -> Bool in
+            return sceneView.isNode(node, insideFrustumOf: pointOfView)
+        }
+        let modelsAreVisible = firstVisibleModel != nil
+        if modelsAreVisible != focusSquareLocal.isHidden{
+            focusSquareLocal.setHidden(to: modelsAreVisible)
+        }
+        */
+        
         let hitTest = sceneView.hitTest(self.screenCenter, types: .existingPlaneUsingExtent) //Within plane bounds?
         if let hitTestResult = hitTest.first{
             let canAddNewModel = hitTestResult.anchor is ARPlaneAnchor

@@ -29,9 +29,25 @@ class FocusSquare: SCNNode{
         
     }
     
+    func setHidden(to hidden: Bool){
+        var fadeTo: SCNAction
+        if hidden{
+            fadeTo = .fadeOut(duration: 0.3)
+        }else{
+            fadeTo = .fadeIn(duration: 0.3)
+        }
+        
+        let actions = [fadeTo, .run({ (focusSquare: SCNNode) in
+            focusSquare.isHidden = hidden
+        })]
+        runAction(.sequence(actions))
+        
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
 }
 

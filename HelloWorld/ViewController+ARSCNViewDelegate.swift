@@ -14,9 +14,9 @@ extension ViewController: ARSCNViewDelegate{
     // Create a plane when new anchor is found in the Scene Views session
     // also create a focus square
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else{return}
-        let planeNode = createPlane(planeAnchor)
-        node.addChildNode(planeNode)
+  //      guard let planeAnchor = anchor as? ARPlaneAnchor else{return}
+  //      let planeNode = createPlane(planeAnchor)
+  //      node.addChildNode(planeNode)
         
         guard self.focusSquare == nil else{return}
         let focusSquareLocal = FocusSquare()
@@ -27,20 +27,20 @@ extension ViewController: ARSCNViewDelegate{
     
     // Update plane in order for it to dynamically change
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        guard let planeAnchor = anchor as? ARPlaneAnchor else{return}
-        node.enumerateChildNodes { (childNode, _) in
-            childNode.removeFromParentNode()
-        }
-        let updatedPlaneNode = createPlane(planeAnchor)
-        node.addChildNode(updatedPlaneNode)
+  //      guard let planeAnchor = anchor as? ARPlaneAnchor else{return}
+  //      node.enumerateChildNodes { (childNode, _) in
+  //          childNode.removeFromParentNode()
+  //      }
+  //      let updatedPlaneNode = createPlane(planeAnchor)
+  //      node.addChildNode(updatedPlaneNode)
     }
     
     // Make sure the node is removed when plane is removed
     func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
         guard anchor is ARPlaneAnchor else{return}
-        node.enumerateChildNodes { (childNode, _) in
-            childNode.removeFromParentNode()
-        }
+//        node.enumerateChildNodes { (childNode, _) in
+//            childNode.removeFromParentNode()
+//        }
     }
     
     // Update focus square position to screen center with hitTest. Call updateFocusSquare() to make sure position is within bounds of a plane
