@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		F801390521A983810047DF13 /* ViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F801390421A983810047DF13 /* ViewController+ARSCNViewDelegate.swift */; };
 		F81DB62221AAF56700E9EE63 /* ViewController+ObjectAddition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81DB62121AAF56600E9EE63 /* ViewController+ObjectAddition.swift */; };
-		F82354A021A99D740089E734 /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823549F21A99D740089E734 /* FocusSquare.swift */; };
 		F89B6B5621A892C400339B48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B6B5521A892C400339B48 /* AppDelegate.swift */; };
 		F89B6B5821A892C400339B48 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = F89B6B5721A892C400339B48 /* art.scnassets */; };
 		F89B6B5A21A892C400339B48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89B6B5921A892C400339B48 /* ViewController.swift */; };
 		F89B6B5D21A892C400339B48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F89B6B5B21A892C400339B48 /* Main.storyboard */; };
 		F89B6B5F21A892C500339B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F89B6B5E21A892C500339B48 /* Assets.xcassets */; };
 		F89B6B6221A892C500339B48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F89B6B6021A892C500339B48 /* LaunchScreen.storyboard */; };
+		F8FE9F2721AB0B200096097C /* FocusSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FE9F2621AB0B200096097C /* FocusSquare.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +38,6 @@
 /* Begin PBXFileReference section */
 		F801390421A983810047DF13 /* ViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
 		F81DB62121AAF56600E9EE63 /* ViewController+ObjectAddition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ObjectAddition.swift"; sourceTree = "<group>"; };
-		F823549F21A99D740089E734 /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 		F89B6B5221A892C400339B48 /* HelloWorld.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloWorld.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89B6B5521A892C400339B48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F89B6B5721A892C400339B48 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		F89B6B6321A892C500339B48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F89B6B6821A892C500339B48 /* HelloWorldTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloWorldTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89B6B7321A892C500339B48 /* HelloWorldUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HelloWorldUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8FE9F2621AB0B200096097C /* FocusSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSquare.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 				F89B6B5921A892C400339B48 /* ViewController.swift */,
 				F801390421A983810047DF13 /* ViewController+ARSCNViewDelegate.swift */,
 				F81DB62121AAF56600E9EE63 /* ViewController+ObjectAddition.swift */,
-				F823549F21A99D740089E734 /* FocusSquare.swift */,
+				F8FE9F2621AB0B200096097C /* FocusSquare.swift */,
 				F89B6B5B21A892C400339B48 /* Main.storyboard */,
 				F89B6B5E21A892C500339B48 /* Assets.xcassets */,
 				F89B6B6021A892C500339B48 /* LaunchScreen.storyboard */,
@@ -245,9 +245,9 @@
 			files = (
 				F81DB62221AAF56700E9EE63 /* ViewController+ObjectAddition.swift in Sources */,
 				F801390521A983810047DF13 /* ViewController+ARSCNViewDelegate.swift in Sources */,
-				F82354A021A99D740089E734 /* FocusSquare.swift in Sources */,
 				F89B6B5A21A892C400339B48 /* ViewController.swift in Sources */,
 				F89B6B5621A892C400339B48 /* AppDelegate.swift in Sources */,
+				F8FE9F2721AB0B200096097C /* FocusSquare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
