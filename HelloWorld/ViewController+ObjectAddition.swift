@@ -61,7 +61,7 @@ extension ViewController {
         let hitTest = sceneView.hitTest(self.screenCenter, types: .existingPlaneUsingExtent)
         guard let position = hitTest.first?.worldTransform.columns.3 else {return}
         model.position = SCNVector3(position.x, position.y, position.z)
-        
+        model.categoryBitMask = BodyType.objectModel.rawValue
         sceneView.scene.rootNode.addChildNode(model)
         totalModelsInScene.append(model)
     //  print(totalModelsInScene.count)

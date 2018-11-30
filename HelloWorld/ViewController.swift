@@ -19,6 +19,13 @@ class ViewController: UIViewController {
     
     var totalModelsInScene: Array<SCNNode> = []
     
+    enum BodyType : Int {
+        case objectModel = 2 //
+    }
+    
+    private var newAngleY: Float = 0.0
+    private var currentAngleY: Float = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,12 +34,14 @@ class ViewController: UIViewController {
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
-        sceneView.debugOptions = [.showFeaturePoints]
+      //  sceneView.debugOptions = [.showFeaturePoints]
         
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
-        
+    
         screenCenter = view.center
+        
+        registerGestureRecognizers()
         
         // Create a new scene
         //let scene = SCNScene(named: "art.scnassets/ship.scn")!
@@ -66,7 +75,74 @@ class ViewController: UIViewController {
         self.screenCenter = viewCenter
     }
     
+    private func registerGestureRecognizers(){
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(panned))
+        self.sceneView.addGestureRecognizer(panGestureRecognizer)
+        
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(moved))
+        self.sceneView.addGestureRecognizer(longPressGestureRecognizer)
+        
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinched))
+        self.sceneView.addGestureRecognizer(pinchGestureRecognizer)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapped))
+        self.sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
     
+    @objc func panned(recognizer :UIPanGestureRecognizer) {
+        guard let recognizerView = recognizer.view as? ARSCNView else {return}
+        
+        let touch = recognizer.location(in: recognizerView)
+        let translation = recognizer.translation(in: recognizerView)
+        
+        let hitTestResult = self.sceneView.hitTest(touch, options: [SCNHitTestOption.categoryBitMask: BodyType.objectModel.rawValue])
+        guard let modelNodeHit = hitTestResult.first?.node else { return }
+        if recognizer.state == .changed {
+            self.newAngleY = Float(translation.x) * (Float) (Double.pi) / 180
+            self.newAngleY += self.currentAngleY
+            modelNodeHit.eulerAngles.y = self.newAngleY
+        }else if recognizer.state == .ended {
+            self.currentAngleY = self.newAngleY
+        }
+    }
+    
+    @objc func moved(recognizer :UILongPressGestureRecognizer) {
+        guard let recognizerView = recognizer.view as? ARSCNView else { return }
+        
+        let touch = recognizer.location(in: recognizerView)
+        
+        let hitTestResult = self.sceneView.hitTest(touch, options: [SCNHitTestOption.categoryBitMask: BodyType.objectModel.rawValue])
+        guard let modelNodeHit = hitTestResult.first?.node else { return }
+
+        if recognizer.state == .changed {
+            let hitTestPlane = self.sceneView.hitTest(touch, types: .existingPlane)
+            if let planeHit = hitTestPlane.first{
+                modelNodeHit.position = SCNVector3(planeHit.worldTransform.columns.3.x,modelNodeHit.position.y,planeHit.worldTransform.columns.3.z)
+            }
+        }
+    }
+    
+    @objc func pinched(recognizer :UIPinchGestureRecognizer) {
+        guard let recognizerView = recognizer.view as? ARSCNView else { return }
+        
+        let touch = recognizer.location(in: recognizerView)
+        
+        let hitTestResult = self.sceneView.hitTest(touch, options: [SCNHitTestOption.categoryBitMask: BodyType.objectModel.rawValue])
+        guard let modelNodeHit = hitTestResult.first?.node else { return }
+        
+        if recognizer.state == .changed {
+            let pinchScaleX = Float(recognizer.scale) * modelNodeHit.scale.x
+            let pinchScaleY = Float(recognizer.scale) * modelNodeHit.scale.y
+            let pinchScaleZ = Float(recognizer.scale) * modelNodeHit.scale.z
+            modelNodeHit.scale = SCNVector3(x: pinchScaleX, y: pinchScaleY, z: pinchScaleZ)
+            recognizer.scale = 1
+        }
+    }
+ 
+    @objc func tapped(recognizer :UITapGestureRecognizer) {
+        print("tapped")
+    }
+
     func updateFocusSquare(){
         guard let focusSquareLocal = self.focusSquare else {return}
         
@@ -88,7 +164,6 @@ class ViewController: UIViewController {
         }else{
             focusSquareLocal.isClosed = false
         }
-        
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
